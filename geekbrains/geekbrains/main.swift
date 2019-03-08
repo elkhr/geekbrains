@@ -15,6 +15,10 @@ import Foundation
 // Инициализировать несколько экземпляров структур. Применить к ним различные действия.
 // Вывести значения свойств экземпляров в консоль.
 
+enum CarType {
+    case car
+    case truck
+}
 
 enum EngineState {
     case on
@@ -27,12 +31,23 @@ enum WindowState {
 }
 
 struct Car {
+    var type: CarType
     var mark : String
     var year : Int
     var emptyTrunk : Int
     var engine : EngineState
     var window : WindowState
     var fullTrunk : Int
+    init(mark : String, year : Int, emptyTrunk : Int, engine : EngineState, window : WindowState, fullTrunk : Int) {
+        type = .car
+        self.mark = mark
+        self.year = year
+        self.emptyTrunk = emptyTrunk
+        self.engine = engine
+        self.window = window
+        self.fullTrunk = fullTrunk
+    }
+    
     mutating func changeEngineState(){
         engine = engine == .on ? .off : .on
     }
@@ -42,9 +57,19 @@ struct Car {
     mutating func cargo(value: Int) {
         emptyTrunk += value
     }
+    init(){
+        type = .car
+        mark = "AUDI"
+        year = 2019
+        emptyTrunk = 59
+        engine = .off
+        window = .close
+        fullTrunk = 90
+    }
 }
 
 struct Truck {
+    var type: CarType
     var mark : String
     var year : Int
     var emptyTrunk : Int
@@ -62,6 +87,9 @@ struct Truck {
         }
 }
 
+var car = Car(mark: "AUDI", year: 2019, emptyTrunk: 59, engine: .off, window: .close, fullTrunk: 90)
 
-var audi = Car (mark: "AUDI", year: 2014, emptyTrunk: 50, engine: .on, window: .close, fullTrunk: 100)
-var volvo = Truck (mark: "Volvo", year: 2019, emptyTrunk: 500, engine: .off, window: .open, fullTrunk: 1000)
+print(car)
+
+//var audi = Car (mark: "AUDI", year: 2014, emptyTrunk: 50, engine: .on, window: .close, fullTrunk: 100)
+//var volvo = Truck (type: .truck, mark: "Volvo", year: 2019, emptyTrunk: 500, engine: .off, window: .open, fullTrunk: 1000)
