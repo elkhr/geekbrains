@@ -38,8 +38,8 @@ struct Car {
     var engine : EngineState
     var window : WindowState
     var fullTrunk : Int
-    init(mark : String, year : Int, emptyTrunk : Int, engine : EngineState, window : WindowState, fullTrunk : Int) {
-        type = .car
+    init(type : CarType, mark : String, year : Int, emptyTrunk : Int, engine : EngineState, window : WindowState, fullTrunk : Int) {
+        self.type = type
         self.mark = mark
         self.year = year
         self.emptyTrunk = emptyTrunk
@@ -55,16 +55,7 @@ struct Car {
         window = window == .open ? .close : .open
     }
     mutating func cargo(value: Int) {
-        emptyTrunk += value
-    }
-    init(){
-        type = .car
-        mark = "AUDI"
-        year = 2019
-        emptyTrunk = 59
-        engine = .off
-        window = .close
-        fullTrunk = 90
+        fullTrunk += value
     }
 }
 
@@ -76,6 +67,16 @@ struct Truck {
     var engine : EngineState
     var window : WindowState
     var fullTrunk : Int
+    init(type : CarType, mark : String, year : Int, emptyTrunk : Int, engine : EngineState, window : WindowState, fullTrunk : Int) {
+        self.type = type
+        self.mark = mark
+        self.year = year
+        self.emptyTrunk = emptyTrunk
+        self.engine = engine
+        self.window = window
+        self.fullTrunk = fullTrunk
+    }
+    
     mutating func changeEngineState(){
         engine = engine == .on ? .off : .on
     }
@@ -83,13 +84,20 @@ struct Truck {
         window = window == .open ? .close : .open
     }
     mutating func cargo(value: Int) {
-            emptyTrunk += value
+            fullTrunk += value
         }
 }
 
-var car = Car(mark: "AUDI", year: 2019, emptyTrunk: 59, engine: .off, window: .close, fullTrunk: 90)
+var car = Car(type: .car, mark: "AUDI", year: 2019, emptyTrunk: 100, engine: .off, window: .close, fullTrunk: 90)
+print("Свойства легкового авто:", car.type, car.mark, car.year, car.emptyTrunk, car.engine, car.window, car.fullTrunk)
+car.cargo(value: 10)
+car.changeEngineState()
+car.changeWindowsState()
+print("Свойства легкового авто после выполнения действий:", car.type, car.mark, car.year, car.emptyTrunk, car.engine, car.window, car.fullTrunk)
 
-print(car)
-
-//var audi = Car (mark: "AUDI", year: 2014, emptyTrunk: 50, engine: .on, window: .close, fullTrunk: 100)
-//var volvo = Truck (type: .truck, mark: "Volvo", year: 2019, emptyTrunk: 500, engine: .off, window: .open, fullTrunk: 1000)
+var truck = Truck(type: .truck, mark: "Volvo", year: 2014, emptyTrunk: 1000, engine: .on, window: .open, fullTrunk: 500)
+print("Свойства грузовика:", truck.type, truck.mark, truck.year, truck.emptyTrunk, truck.engine, truck.window, truck.fullTrunk)
+truck.cargo(value: 300)
+truck.changeEngineState()
+truck.changeWindowsState()
+print("Свойства грузовика после выполнения действий:",truck.type, truck.mark, truck.year, truck.emptyTrunk, truck.engine, truck.window, truck.fullTrunk)
