@@ -36,13 +36,18 @@ enum HookTrailer {
 class Car {
     let color: String
     let enginePower: Int
-    let transmission: Transmission
+    var transmission: Transmission
     
     init(color: String, enginePower: Int, transmission: Transmission) {
         self.color = color
         self.enginePower = enginePower
         self.transmission = transmission
             }
+    func action (){
+        if transmission != .manual {
+            transmission = .manual
+        } else {transmission = .auto}
+    }
 }
 
 class SportCar : Car {
@@ -53,7 +58,7 @@ class SportCar : Car {
         self.engine = engine
         self.turbo = turbo
     }
-    func action (_ action: Turbo){
+    override func action (){
         if turbo != .on {
             turbo = .on
         } else {turbo = .off}
@@ -69,7 +74,7 @@ class TruckCar : Car {
         self.trailer = trailer
         self.hooktrailer = hooktrailer
             }
-    func action (_ action: HookTrailer){
+    override func action (){
         if hooktrailer != .hook {
             hooktrailer = .hook
         } else {hooktrailer = .unhooked}
@@ -79,12 +84,12 @@ class TruckCar : Car {
 var sport = SportCar (color: "red", enginePower: 900, transmission: .manual, engine: .rotor, turbo: .off)
 print ("Свойства спорткара: цвет:", sport.color, ", мощность (л/с):", sport.enginePower, ", тип трансмиссии:", sport.transmission, ", включение турбо-режима:", sport.turbo)
 
-sport.action(.off)
+sport.action()
 print ("Свойства спорткара после действия: цвет:", sport.color, ", мощность (л/с):", sport.enginePower, ", тип трансмиссии:", sport.transmission, ", включение турбо-режима:", sport.turbo)
 
 
 var truck = TruckCar (color: "blue", enginePower: 250, transmission: .auto, trailer: true, hooktrailer: .unhooked)
 print ("Свойства грузовика: цвет:", truck.color, ", мощность (л/с):", truck.enginePower, ", тип трансмиссии:", truck.transmission, ", наличие прицепа:", truck.trailer, ", сцепка прицепа:", truck.hooktrailer)
 
-truck.action(.unhooked)
+truck.action()
 print ("Свойства грузовика после действия: цвет:", truck.color, ", мощность (л/с):", truck.enginePower, ", тип трансмиссии:", truck.transmission, ", наличие прицепа:", truck.trailer, ", сцепка прицепа:", truck.hooktrailer)
