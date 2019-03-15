@@ -34,16 +34,41 @@ protocol Car {
     var color: String { get }
     var enginePower: Int { get }
     var windowState: Window { get set }
-    var engineState: Engine { get set}
+    var engineState: Engine { get set }
+    func engineOn ()
+    func windowClose ()
     }
 
-class sportCar : Car {
+extension Car {
+    mutating func engineOn() {
+        if (engineState == .off) {
+        (engineState = .on)
+        }
+    }
+    mutating func windowClose () {
+        if (windowState == .open) {
+            windowState = .close
+        }
+    }
+}
+
+class SportCar : Car {
     var color: String
     var enginePower: Int
     var windowState: Window
     var engineState: Engine
     var trailer: Bool
     var weelCondition: Weel
+    func engineOn() {
+        if (engineState == .off) {
+            engineState = .on
+        }
+    }
+    func windowClose() {
+        if (windowState == .open) {
+            windowState = .close
+        }
+    }
     init(color: String, enginePower: Int, windowState: Window, engineState: Engine, trailer: Bool, weelCondition: Weel){
         self.color = color
         self.enginePower = enginePower
@@ -54,21 +79,16 @@ class sportCar : Car {
     }
 }
 
-
-protocol changeWindowState {
-    func changeWindowState() -> Window
-}
-
-extension sportCar : changeWindowState {
-    func changeWindowState() -> Window {
-        if windowState != .open {
-        windowState = .close
-        } else {windowState = .open}
+extension SportCar: CustomStringConvertible {
+    var description: String {
+        return "состояние двигателя: \(engineState)"
     }
 }
 
-var sport = sportCar (color: "red", enginePower: 900, windowState: .open, engineState: .off, trailer: false, weelCondition: .sportWeel)
-
+var sport = SportCar (color: "red", enginePower: 900, windowState: .open, engineState: .off, trailer: false, weelCondition: .sportWeel)
+print(sport)
+sport.engineOn()
+print(sport)
 
 
 /*class trunkCar : Car {
