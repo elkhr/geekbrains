@@ -35,8 +35,8 @@ protocol Car {
     var enginePower: Int { get }
     var windowState: Window { get set }
     var engineState: Engine { get set }
-    func engineOn ()
-    func windowClose ()
+    mutating func engineOn ()
+    mutating func windowClose ()
     }
 
 extension Car {
@@ -59,17 +59,7 @@ class SportCar : Car {
     var engineState: Engine
     var trailer: Bool
     var weelCondition: Weel
-    func engineOn() {
-        if (engineState == .off) {
-            engineState = .on
-        }
-    }
-    func windowClose() {
-        if (windowState == .open) {
-            windowState = .close
-        }
-    }
-    init(color: String, enginePower: Int, windowState: Window, engineState: Engine, trailer: Bool, weelCondition: Weel){
+        init(color: String, enginePower: Int, windowState: Window, engineState: Engine, trailer: Bool, weelCondition: Weel){
         self.color = color
         self.enginePower = enginePower
         self.windowState = windowState
@@ -79,6 +69,7 @@ class SportCar : Car {
     }
 }
 
+
 class TrunkCar : Car {
     var color: String
     var enginePower: Int
@@ -86,17 +77,7 @@ class TrunkCar : Car {
     var engineState: Engine
     var trailer: Bool
     var weelCondition: Weel
-    func engineOn() {
-        if (engineState == .off) {
-            engineState = .on
-        }
-    }
-    func windowClose() {
-        if (windowState == .open) {
-            windowState = .close
-        }
-    }
-    init(color: String, enginePower: Int, windowState: Window, engineState: Engine, trailer: Bool, weelCondition: Weel){
+        init(color: String, enginePower: Int, windowState: Window, engineState: Engine, trailer: Bool, weelCondition: Weel){
         self.color = color
         self.enginePower = enginePower
         self.windowState = windowState
