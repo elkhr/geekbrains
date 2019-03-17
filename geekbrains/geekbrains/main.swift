@@ -50,11 +50,11 @@ fruitsInThePocket.push(Orange(weight: 220))
 var array = [fruitsInThePocket]
 print(array)
 
-array.sort { $0 > $1 }
 
+/*
+ array.sort { $0 > $1 }
 
-
-/*var totalWeight : Double {
+ var totalWeight : Double {
     var weight = 0.0
     for _ in elements {
         weight += elements.weight
