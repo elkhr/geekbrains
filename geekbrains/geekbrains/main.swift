@@ -38,16 +38,7 @@ struct Stack <T> {
     mutating func pop() -> T? {
         return elements.removeLast()
     }
-    
-    /*subscript(position: Int) -> T? {
-        if position >= 0 && position < elements.count {
-            return elements[position]
-        }
-        return nil
-*/
 }
-
-
 
 var fruitsInThePocket = Stack <Fruits>()
 fruitsInThePocket.push(Apple(weight: 100))
@@ -55,7 +46,11 @@ fruitsInThePocket.push(Apple(weight: 120))
 fruitsInThePocket.push(Apple(weight: 150))
 fruitsInThePocket.push(Orange(weight: 200))
 fruitsInThePocket.push(Orange(weight: 220))
-print(fruitsInThePocket.elements)
+
+var array = [fruitsInThePocket]
+print(array)
+
+array.sort { $0 > $1 }
 
 
 
@@ -66,4 +61,14 @@ print(fruitsInThePocket.elements)
     }
     return weight
 }
+ 
+ print(fruitsInThePocket.elements)
+ 
+ subscript(position: Int) -> T? {
+ if position >= 0 && position < elements.count {
+ return elements[position]
+ }
+ return nil
+ }
 */
+
